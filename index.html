@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Artigo de Grife do Japa | Moda Exclusiva</title>
 
+    <link rel="icon" href="imgs/FotoFavIcon.png" type="image/png">
+
     <!-- Fontes -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -13,7 +15,6 @@
 
     <style>
         :root {
-            /* Paleta principal - Azul Marinho Elegante */
             --deep-navy: #0b1a2e;
             --navy: #122b42;
             --navy-light: #1b3b58;
@@ -26,10 +27,9 @@
             --dark-text: #131313;
             --soft-black: #1c1c1c;
 
-            /* Tema Claro (padrão) */
             --bg: #fafaf7;
             --bg-card: #ffffff;
-            --bg-nav: rgba(250, 250, 247, 0.9);
+            --bg-nav: rgba(250, 250, 247, 0.92);
             --text: #1a1a1a;
             --text-secondary: #4d4a47;
             --text-tertiary: #807b76;
@@ -49,7 +49,7 @@
         .dark-mode {
             --bg: #0f1219;
             --bg-card: #181c24;
-            --bg-nav: rgba(15, 18, 25, 0.9);
+            --bg-nav: rgba(15, 18, 25, 0.92);
             --text: #ececec;
             --text-secondary: #b0b0b0;
             --text-tertiary: #828282;
@@ -89,14 +89,14 @@
             right: 0;
             z-index: 1000;
             background: var(--bg-nav);
-            backdrop-filter: blur(18px);
+            backdrop-filter: blur(20px);
             border-bottom: 1px solid transparent;
-            transition: 0.3s;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             padding: 0 2rem;
         }
         .navbar.scrolled {
             border-bottom-color: var(--border);
-            box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.04);
         }
         .navbar-inner {
             max-width: 1300px;
@@ -104,40 +104,66 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            height: 68px;
-            gap: 20px;
+            height: 70px;
         }
         .brand {
             display: flex;
             align-items: center;
-            gap: 10px;
             text-decoration: none;
+            gap: 6px;
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
-        .brand-icon {
-            width: 36px;
-            height: 36px;
-            background: var(--gold);
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #fff;
-            font-size: 1rem;
+        .brand:hover {
+            transform: scale(1.02);
         }
         .brand-text {
             font-family: 'DM Serif Display', serif;
-            font-size: 1.2rem;
+            font-size: 1.4rem;
+            font-weight: 400;
             color: var(--text);
             letter-spacing: -0.01em;
+            transition: color 0.3s;
         }
         .brand-text span {
-            font-weight: 400;
             color: var(--gold);
+            font-weight: 400;
+        }
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 32px;
+            align-items: center;
+        }
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            font-weight: 500;
+            position: relative;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            padding: 8px 0;
+        }
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gold);
+            transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .nav-links a:hover {
+            color: var(--text);
+            transform: translateY(-1px);
+        }
+        .nav-links a:hover::after {
+            width: 100%;
         }
         .nav-actions {
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 16px;
         }
         .theme-toggle {
             background: var(--toggle-bg);
@@ -147,7 +173,11 @@
             border-radius: 50px;
             cursor: pointer;
             position: relative;
-            transition: 0.3s;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            flex-shrink: 0;
+        }
+        .theme-toggle:hover {
+            transform: scale(1.05);
         }
         .toggle-dot {
             width: 20px;
@@ -157,7 +187,7 @@
             position: absolute;
             left: 3px;
             top: 3px;
-            transition: 0.35s cubic-bezier(0.4,0,0.2,1);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -168,36 +198,80 @@
         }
         .toggle-dot i {
             color: var(--gold);
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .dark-mode .toggle-dot i {
+            transform: rotate(360deg);
         }
         .nav-cta {
-            background: var(--nav-cta-bg);
-            color: var(--nav-cta-text);
-            padding: 10px 22px;
+            background: var(--gold);
+            color: #0b1a2e;
+            padding: 10px 24px;
             border-radius: 50px;
             text-decoration: none;
-            font-weight: 600;
+            font-weight: 700;
             font-size: 0.85rem;
             display: flex;
             align-items: center;
             gap: 8px;
-            transition: 0.3s;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            white-space: nowrap;
+            border: none;
+            cursor: pointer;
         }
         .nav-cta:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+            background: #d4b46e;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 24px rgba(200,164,92,0.3);
         }
-        @media (max-width: 500px) {
+        .nav-cta:active {
+            transform: scale(0.95);
+            transition: transform 0.1s ease;
+        }
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--text);
+            cursor: pointer;
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .menu-toggle:hover {
+            transform: scale(1.1);
+        }
+        @media (max-width: 768px) {
+            .nav-links {
+                position: fixed;
+                top: 70px;
+                left: 0;
+                right: 0;
+                background: var(--bg-nav);
+                backdrop-filter: blur(20px);
+                flex-direction: column;
+                padding: 20px;
+                gap: 16px;
+                border-bottom: 1px solid var(--border);
+                transform: translateY(-120%);
+                opacity: 0;
+                transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+                z-index: -1;
+            }
+            .nav-links.active {
+                transform: translateY(0);
+                opacity: 1;
+            }
+            .menu-toggle {
+                display: block;
+            }
             .nav-cta span {
                 display: none;
-            }
-            .brand-text {
-                font-size: 1rem;
             }
         }
 
         /* ============ HEADER AZUL MARINHO ============ */
         .hero {
-            margin-top: 68px;
+            margin-top: 70px;
             background: var(--deep-navy);
             padding: 0;
             color: #fff;
@@ -210,6 +284,15 @@
             display: flex;
             flex-direction: column;
             min-height: 480px;
+            opacity: 0;
+            transform: translateY(40px);
+            animation: fadeInUp 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+        }
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
         @media (min-width: 860px) {
             .hero-container {
@@ -227,11 +310,6 @@
             align-items: center;
             gap: 12px;
             margin-bottom: 20px;
-        }
-        .hero-eyebrow .line {
-            width: 36px;
-            height: 2px;
-            background: var(--gold);
         }
         .hero-eyebrow span {
             font-family: 'Inter', sans-serif;
@@ -276,14 +354,19 @@
             display: inline-flex;
             align-items: center;
             gap: 10px;
-            transition: 0.3s;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             border: none;
             cursor: pointer;
             font-size: 0.9rem;
         }
         .btn-primary:hover {
             background: #d4b46e;
-            transform: translateY(-2px);
+            transform: translateY(-3px);
+            box-shadow: 0 12px 28px rgba(200,164,92,0.4);
+        }
+        .btn-primary:active {
+            transform: scale(0.95);
+            transition: transform 0.1s ease;
         }
         .btn-outline {
             border: 2px solid rgba(255,255,255,0.5);
@@ -295,12 +378,17 @@
             display: inline-flex;
             align-items: center;
             gap: 8px;
-            transition: 0.3s;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             font-size: 0.9rem;
         }
         .btn-outline:hover {
             border-color: #fff;
             background: rgba(255,255,255,0.08);
+            transform: translateY(-3px);
+        }
+        .btn-outline:active {
+            transform: scale(0.95);
+            transition: transform 0.1s ease;
         }
         .hero-visual {
             flex: 1;
@@ -325,7 +413,7 @@
         .hero-carousel-track {
             display: flex;
             height: 100%;
-            transition: transform 0.4s cubic-bezier(0.4,0,0.2,1);
+            transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
             will-change: transform;
         }
         .hero-carousel-slide {
@@ -357,10 +445,14 @@
             box-shadow: 0 4px 14px rgba(0,0,0,0.15);
             z-index: 5;
             opacity: 0;
-            transition: opacity 0.3s;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
         .hero-carousel:hover .hero-carousel-arrow {
             opacity: 1;
+        }
+        .hero-carousel-arrow:hover {
+            transform: translateY(-50%) scale(1.1);
+            background: #fff;
         }
         .hero-carousel-arrow.left {
             left: 10px;
@@ -384,7 +476,7 @@
             background: rgba(255,255,255,0.4);
             border: none;
             cursor: pointer;
-            transition: 0.3s;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
         .hero-carousel-dot.active {
             background: #fff;
@@ -419,6 +511,15 @@
             max-width: 1300px;
             margin: 0 auto;
             padding: 60px 2rem 80px;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 0.8s cubic-bezier(0.4, 0, 0.2, 1) 0.3s forwards;
+        }
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
         .section-title {
             font-family: 'DM Serif Display', serif;
@@ -437,12 +538,16 @@
             overflow: hidden;
             border: 1px solid var(--border-light);
             box-shadow: var(--shadow);
-            transition: 0.35s;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             cursor: pointer;
         }
         .product-card:hover {
-            transform: translateY(-5px);
+            transform: translateY(-8px);
             box-shadow: var(--shadow-lg);
+        }
+        .product-card:active {
+            transform: scale(0.97);
+            transition: transform 0.15s ease;
         }
         .swipe-container {
             position: relative;
@@ -455,7 +560,7 @@
         .swipe-track {
             display: flex;
             height: 100%;
-            transition: transform 0.25s ease;
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             will-change: transform;
         }
         .swipe-slide {
@@ -486,10 +591,14 @@
             box-shadow: 0 4px 12px rgba(0,0,0,0.1);
             z-index: 5;
             opacity: 0;
-            transition: opacity 0.25s;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
         .swipe-container:hover .swipe-arrow {
             opacity: 1;
+        }
+        .swipe-arrow:hover {
+            background: #fff;
+            transform: translateY(-50%) scale(1.1);
         }
         .swipe-arrow.left {
             left: 8px;
@@ -513,11 +622,11 @@
             background: rgba(255,255,255,0.5);
             border: none;
             cursor: pointer;
-            transition: 0.2s;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
         .swipe-dot.active {
             background: #fff;
-            transform: scale(1.2);
+            transform: scale(1.3);
         }
         .product-info {
             padding: 16px 18px 18px;
@@ -585,10 +694,11 @@
             color: #fff;
             margin: 0 10px;
             font-size: 1.2rem;
-            transition: 0.3s;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
         .footer-social a:hover {
             color: var(--gold);
+            transform: translateY(-3px);
         }
         .footer-bottom {
             font-size: 0.7rem;
@@ -612,7 +722,7 @@
             box-shadow: 0 6px 20px rgba(0,0,0,0.2);
             opacity: 0;
             visibility: hidden;
-            transition: 0.3s;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             z-index: 99;
             display: flex;
             align-items: center;
@@ -622,27 +732,44 @@
             opacity: 1;
             visibility: visible;
         }
+        .scroll-top:hover {
+            transform: translateY(-4px) scale(1.05);
+            box-shadow: 0 8px 28px rgba(200,164,92,0.5);
+        }
+        .scroll-top:active {
+            transform: scale(0.9);
+            transition: transform 0.1s ease;
+        }
     </style>
 </head>
 <body>
 
+    <!-- ============ NAVBAR ============ -->
     <nav class="navbar" id="navbar">
         <div class="navbar-inner">
-            <a href="#" class="brand">
-                <div class="brand-icon"><i class="fa-solid fa-crown"></i></div>
-                <div class="brand-text">Grife do <span>Japa</span></div>
+            <a href="#" class="brand" onclick="smoothScrollTo(event, 'top')">
+                <span class="brand-text">Grife do <span>Japa</span></span>
             </a>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#" onclick="smoothScrollTo(event, 'top'); closeMenu();">Início</a></li>
+                <li><a href="#products" onclick="smoothScrollTo(event, '#products'); closeMenu();">Peças</a></li>
+                <li><a href="https://www.instagram.com/artigo_de_grifedojapa/" target="_blank" onclick="closeMenu()">Instagram</a></li>
+            </ul>
             <div class="nav-actions">
                 <button class="theme-toggle" id="themeToggle" aria-label="Alternar tema">
                     <span class="toggle-dot"><i class="fa-solid fa-sun" id="toggleIcon"></i></span>
                 </button>
-                <a href="https://www.instagram.com/artigo_de_grifedojapa/" target="_blank" class="nav-cta">
-                    <i class="fa-brands fa-instagram"></i> <span>Fale Conosco</span>
+                <a href="https://ig.me/m/artigo_de_grifedojapa" target="_blank" class="nav-cta">
+                    <i class="fa-brands fa-instagram"></i> <span>Comprar</span>
                 </a>
+                <button class="menu-toggle" id="menuToggle" aria-label="Abrir menu">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
             </div>
         </div>
     </nav>
 
+    <!-- ============ HEADER ============ -->
     <header class="hero">
         <div class="hero-container">
             <div class="hero-content">
@@ -655,7 +782,7 @@
                     <a href="https://www.instagram.com/artigo_de_grifedojapa/" target="_blank" class="btn-primary">
                         <i class="fa-brands fa-instagram"></i> Comprar pelo Instagram
                     </a>
-                    <a href="#products" class="btn-outline">
+                    <a href="#products" onclick="smoothScrollTo(event, '#products')" class="btn-outline">
                         Ver Peças <i class="fa-solid fa-arrow-down"></i>
                     </a>
                 </div>
@@ -664,9 +791,9 @@
                 <div class="hero-accent-circle"></div>
                 <div class="hero-carousel" id="heroCarousel">
                     <div class="hero-carousel-track" id="heroTrack">
-                        <div class="hero-carousel-slide"><img src="imgs/CamisetasTommy320.png" alt="CamisetasTommy320"></div>
-                        <div class="hero-carousel-slide"><img src="imgs/Moletom1Jordan.png" alt="Moletom1Jordan"></div>
-                        <div class="hero-carousel-slide"><img src="imgs/PoloTommy1.png" alt="PoloTommy1"></div>
+                        <div class="hero-carousel-slide"><img src="imgs/CamisetasTommy320.png" alt="Camisetas Tommy"></div>
+                        <div class="hero-carousel-slide"><img src="imgs/Moletom1Jordan.png" alt="Moletom Jordan"></div>
+                        <div class="hero-carousel-slide"><img src="imgs/PoloTommy1.png" alt="Polo Tommy"></div>
                     </div>
                     <button class="hero-carousel-arrow left" id="heroPrev"><i class="fa-solid fa-chevron-left"></i></button>
                     <button class="hero-carousel-arrow right" id="heroNext"><i class="fa-solid fa-chevron-right"></i></button>
@@ -676,11 +803,13 @@
         </div>
     </header>
 
+    <!-- ============ PRODUTOS ============ -->
     <section class="products-section" id="products">
         <h2 class="section-title">Peças em Destaque</h2>
         <div class="products-grid" id="productsGrid"></div>
     </section>
 
+    <!-- ============ FOOTER ============ -->
     <footer class="footer">
         <div class="footer-logo">Artigo de Grife <span>do</span> Japa</div>
         <p>Peças 100% originais. Atendimento via Instagram DM.</p>
@@ -695,24 +824,57 @@
 
     <script>
         (function() {
+            // ---------- FUNÇÃO DE SCROLL SUAVE ----------
+            function smoothScrollTo(event, target) {
+                event.preventDefault();
+                
+                let targetElement;
+                if (target === 'top') {
+                    targetElement = document.body;
+                } else {
+                    targetElement = document.querySelector(target);
+                }
+                
+                if (!targetElement) return;
+                
+                const targetPosition = target === 'top' ? 0 : targetElement.getBoundingClientRect().top + window.pageYOffset;
+                const startPosition = window.pageYOffset;
+                const distance = targetPosition - startPosition;
+                const duration = 900; // Duração da animação
+                let startTime = null;
+                
+                function animation(currentTime) {
+                    if (startTime === null) startTime = currentTime;
+                    const timeElapsed = currentTime - startTime;
+                    const progress = Math.min(timeElapsed / duration, 1);
+                    
+                    // Easing suave (easeInOutCubic)
+                    const ease = progress < 0.5 
+                        ? 4 * progress * progress * progress 
+                        : 1 - Math.pow(-2 * progress + 2, 3) / 2;
+                    
+                    window.scrollTo(0, startPosition + distance * ease);
+                    
+                    if (timeElapsed < duration) {
+                        requestAnimationFrame(animation);
+                    }
+                }
+                
+                requestAnimationFrame(animation);
+            }
+
+            // Torna a função global
+            window.smoothScrollTo = smoothScrollTo;
+
             // ---------- DADOS DOS PRODUTOS ----------
             const products = [
-                { brand: "Tommy Hilfiger", name: "Polos Tommy Hilfiger", desc: "Interessados chama na dm P e M Pronta entrega ✅", price: "Chamar DM", old: "2.490",
-                    imgs: ["imgs/PoloTommy1.png",
-                           "imgs/PoloTommy2.png",
-                            "imgs/PoloTommy3.png",
-                            "imgs/PoloTommy4.png",
-                            "imgs/PoloTommy5.png",
-                            "imgs/PoloTommy6.png",] },
+                { brand: "Tommy Hilfiger", name: "Polos Tommy Hilfiger", desc: "Interessados chama na dm P e M Pronta entrega ✅", price: "Chamar DM", old: "",
+                    imgs: ["imgs/PoloTommy1.png", "imgs/PoloTommy2.png", "imgs/PoloTommy3.png", "imgs/PoloTommy4.png", "imgs/PoloTommy5.png", "imgs/PoloTommy6.png"] },
                 { brand: "Tommy Hilfiger", name: "Camiseta Tommy exclusiva 320", desc: "Pronta entrega 📦 ✅Tamanho M 🫡", price: "Chamar DM", old: "",
-                    imgs: ["imgs/CamisetasTommy320.png",] },
-                { brand: "Nike Air Jordan", name: "Moletom Jordan Original", desc: "Todas disponível sob encomenda 📦 Chama na dm 🫡", price: "Chamar DM", old: "2.890",
-                    imgs: ["imgs/Moletom1Jordan.png",
-                           "imgs/Moletom2Jordan.png",
-                            "imgs/Moletom3Jordan.png",
-                            "imgs/Moletom4Jordan.png"
-                        ] },
-                { brand: "Tommy Hilfiger", name: "Moletom Tommy Bracno", desc: "Edição limitada número M", price: "420.00", old: "899.99",
+                    imgs: ["imgs/CamisetasTommy320.png"] },
+                { brand: "Nike Air Jordan", name: "Moletom Jordan Original", desc: "Todas disponível sob encomenda 📦 Chama na dm 🫡", price: "Chamar DM", old: "",
+                    imgs: ["imgs/Moletom1Jordan.png", "imgs/Moletom2Jordan.png", "imgs/Moletom3Jordan.png", "imgs/Moletom4Jordan.png"] },
+                { brand: "Tommy Hilfiger", name: "Moletom Tommy Branco", desc: "Edição limitada número M", price: "420.00", old: "899.99",
                     imgs: ["imgs/MoletomTommyBranco1.png"] },
                 { brand: "Nike", name: "Conjunto Nike Sport", desc: "Sob encomenda 🫡", price: "420.00", old: "699.99",
                     imgs: ["imgs/ConjuntoNikePretoFit.png"] },
@@ -721,26 +883,19 @@
                 { brand: "Tommy Hilfiger", name: "Jaque Tommy Hilfiger", desc: "Número P", price: "749.99", old: "999.99",
                     imgs: ["imgs/JaquetaCortaVentoTommy.png"] },
                 { brand: "Nike Air Max", name: "Air max plus TN", desc: "Condição 10/10 Chama na dm 🫡 Número 42", price: "899.99", old: "1.299.99",
-                    imgs: ["imgs/AirMaxTnAzul.png",
-                           "imgs/AirMaxTnAzulDeLadoEsquerdo.png",
-                            "imgs/AirMaxTnAzulDeLadoEsquerdoAirMaxTnAzulDeLadoDireito.png",
-                            "imgs/AirMaxTnAzulDeFrente.png"
-                        ] }
+                    imgs: ["imgs/AirMaxTnAzul.png", "imgs/AirMaxTnAzulDeLadoEsquerdo.png", "imgs/AirMaxTnAzulDeLadoEsquerdoAirMaxTnAzulDeLadoDireito.png", "imgs/AirMaxTnAzulDeFrente.png"] }
             ];
 
             const INSTAGRAM_USERNAME = 'artigo_de_grifedojapa';
             const grid = document.getElementById('productsGrid');
 
-            // Renderiza cards de produto
             products.forEach((p, idx) => {
                 const card = document.createElement('div');
                 card.className = 'product-card';
-                card.setAttribute('data-product', p.name);
                 card.addEventListener('click', (e) => {
                     if (e.target.closest('.swipe-arrow') || e.target.closest('.swipe-dot')) return;
                     openDM(p.name);
                 });
-
                 const oldPriceHTML = p.old ? `<span class="old-price">R$ ${p.old}</span>` : '';
                 card.innerHTML = `
                     <div class="swipe-container" id="swipe-${idx}">
@@ -762,10 +917,7 @@
                 grid.appendChild(card);
             });
 
-            // Inicializa carrosséis dos cards
-            products.forEach((_, idx) => {
-                initSwipe(idx);
-            });
+            products.forEach((_, idx) => initSwipe(idx));
 
             function initSwipe(idx) {
                 const track = document.getElementById(`track-${idx}`);
@@ -780,61 +932,39 @@
                     const dot = document.createElement('button');
                     dot.className = 'swipe-dot';
                     if (i === 0) dot.classList.add('active');
-                    dot.addEventListener('click', (e) => {
-                        e.stopPropagation();
-                        goTo(i);
-                    });
+                    dot.addEventListener('click', (e) => { e.stopPropagation(); goTo(i); });
                     dotsContainer.appendChild(dot);
                 }
 
                 function update() {
                     track.style.transform = `translateX(-${current * 100}%)`;
-                    const dots = dotsContainer.querySelectorAll('.swipe-dot');
-                    dots.forEach((d, i) => d.classList.toggle('active', i === current));
+                    dotsContainer.querySelectorAll('.swipe-dot').forEach((d, i) => d.classList.toggle('active', i === current));
                 }
-
                 function goTo(index) {
                     if (index < 0 || index >= totalSlides) return;
                     current = index;
                     update();
                 }
+                leftBtn.addEventListener('click', (e) => { e.stopPropagation(); goTo(current - 1); });
+                rightBtn.addEventListener('click', (e) => { e.stopPropagation(); goTo(current + 1); });
 
-                leftBtn.addEventListener('click', (e) => {
-                    e.stopPropagation();
-                    goTo(current - 1);
-                });
-                rightBtn.addEventListener('click', (e) => {
-                    e.stopPropagation();
-                    goTo(current + 1);
-                });
-
-                // Swipe (touch e mouse)
-                let startX = 0;
-                let isDragging = false;
+                let startX = 0, isDragging = false;
                 const container = document.getElementById(`swipe-${idx}`);
-                container.addEventListener('mousedown', (e) => {
-                    startX = e.clientX;
-                    isDragging = true;
-                });
+                container.addEventListener('mousedown', (e) => { startX = e.clientX; isDragging = true; });
                 window.addEventListener('mousemove', (e) => {
                     if (!isDragging) return;
-                    const diff = e.clientX - startX;
-                    if (Math.abs(diff) > 30) {
-                        if (diff < 0) goTo(current + 1);
+                    if (Math.abs(e.clientX - startX) > 30) {
+                        if (e.clientX < startX) goTo(current + 1);
                         else goTo(current - 1);
                         isDragging = false;
                     }
                 });
                 window.addEventListener('mouseup', () => { isDragging = false; });
-                container.addEventListener('touchstart', (e) => {
-                    startX = e.touches[0].clientX;
-                    isDragging = true;
-                });
+                container.addEventListener('touchstart', (e) => { startX = e.touches[0].clientX; isDragging = true; });
                 container.addEventListener('touchmove', (e) => {
                     if (!isDragging) return;
-                    const diff = e.touches[0].clientX - startX;
-                    if (Math.abs(diff) > 30) {
-                        if (diff < 0) goTo(current + 1);
+                    if (Math.abs(e.touches[0].clientX - startX) > 30) {
+                        if (e.touches[0].clientX < startX) goTo(current + 1);
                         else goTo(current - 1);
                         isDragging = false;
                     }
@@ -842,7 +972,7 @@
                 container.addEventListener('touchend', () => { isDragging = false; });
             }
 
-            // ---------- CARROSSEL DO HERO ----------
+            // Hero carousel
             const heroTrack = document.getElementById('heroTrack');
             const heroDotsContainer = document.getElementById('heroDots');
             const heroPrev = document.getElementById('heroPrev');
@@ -850,7 +980,6 @@
             const heroSlides = heroTrack.children;
             const heroTotal = heroSlides.length;
             let heroCurrent = 0;
-
             for (let i = 0; i < heroTotal; i++) {
                 const dot = document.createElement('button');
                 dot.className = 'hero-carousel-dot';
@@ -858,49 +987,34 @@
                 dot.addEventListener('click', () => heroGoTo(i));
                 heroDotsContainer.appendChild(dot);
             }
-
             function heroUpdate() {
                 heroTrack.style.transform = `translateX(-${heroCurrent * 100}%)`;
-                const dots = heroDotsContainer.querySelectorAll('.hero-carousel-dot');
-                dots.forEach((d, i) => d.classList.toggle('active', i === heroCurrent));
+                heroDotsContainer.querySelectorAll('.hero-carousel-dot').forEach((d, i) => d.classList.toggle('active', i === heroCurrent));
             }
-
             function heroGoTo(index) {
                 if (index < 0 || index >= heroTotal) return;
                 heroCurrent = index;
                 heroUpdate();
             }
-
             heroPrev.addEventListener('click', () => heroGoTo(heroCurrent - 1));
             heroNext.addEventListener('click', () => heroGoTo(heroCurrent + 1));
-
-            // Swipe no hero
-            let heroStartX = 0;
-            let heroDragging = false;
+            let heroStartX = 0, heroDragging = false;
             const heroContainer = document.getElementById('heroCarousel');
-            heroContainer.addEventListener('mousedown', (e) => {
-                heroStartX = e.clientX;
-                heroDragging = true;
-            });
+            heroContainer.addEventListener('mousedown', (e) => { heroStartX = e.clientX; heroDragging = true; });
             window.addEventListener('mousemove', (e) => {
                 if (!heroDragging) return;
-                const diff = e.clientX - heroStartX;
-                if (Math.abs(diff) > 40) {
-                    if (diff < 0) heroGoTo(heroCurrent + 1);
+                if (Math.abs(e.clientX - heroStartX) > 40) {
+                    if (e.clientX < heroStartX) heroGoTo(heroCurrent + 1);
                     else heroGoTo(heroCurrent - 1);
                     heroDragging = false;
                 }
             });
             window.addEventListener('mouseup', () => { heroDragging = false; });
-            heroContainer.addEventListener('touchstart', (e) => {
-                heroStartX = e.touches[0].clientX;
-                heroDragging = true;
-            });
+            heroContainer.addEventListener('touchstart', (e) => { heroStartX = e.touches[0].clientX; heroDragging = true; });
             heroContainer.addEventListener('touchmove', (e) => {
                 if (!heroDragging) return;
-                const diff = e.touches[0].clientX - heroStartX;
-                if (Math.abs(diff) > 40) {
-                    if (diff < 0) heroGoTo(heroCurrent + 1);
+                if (Math.abs(e.touches[0].clientX - heroStartX) > 40) {
+                    if (e.touches[0].clientX < heroStartX) heroGoTo(heroCurrent + 1);
                     else heroGoTo(heroCurrent - 1);
                     heroDragging = false;
                 }
@@ -916,7 +1030,6 @@
             const htmlRoot = document.getElementById('htmlRoot');
             const themeToggle = document.getElementById('themeToggle');
             const toggleIcon = document.getElementById('toggleIcon');
-
             function setTheme(dark) {
                 if (dark) {
                     htmlRoot.classList.add('dark-mode');
@@ -932,19 +1045,26 @@
             if (saved === 'dark') setTheme(true);
             else if (saved === 'light') setTheme(false);
             else setTheme(window.matchMedia('(prefers-color-scheme: dark)').matches);
-
             themeToggle.addEventListener('click', () => setTheme(!htmlRoot.classList.contains('dark-mode')));
 
-            // Navbar e scroll top
+            // Navbar scroll & mobile menu
             const navbar = document.getElementById('navbar');
             const scrollBtn = document.getElementById('scrollTopBtn');
+            const menuToggle = document.getElementById('menuToggle');
+            const navLinks = document.getElementById('navLinks');
             window.addEventListener('scroll', () => {
                 navbar.classList.toggle('scrolled', window.scrollY > 20);
                 scrollBtn.classList.toggle('visible', window.scrollY > 500);
             });
-            scrollBtn.addEventListener('click', () => window.scrollTo({top:0, behavior:'smooth'}));
-
-            console.log('✨ Carrossel no hero e swipe nos cards funcionando!');
+            scrollBtn.addEventListener('click', (e) => {
+                smoothScrollTo(e, 'top');
+            });
+            menuToggle.addEventListener('click', () => {
+                navLinks.classList.toggle('active');
+            });
+            window.closeMenu = function() {
+                navLinks.classList.remove('active');
+            };
         })();
     </script>
 </body>
